@@ -235,6 +235,13 @@
       padding: 28px 24px 20px;
       text-align: center;
       border-bottom: 4px solid #1a1a1a;
+      position: relative;
+    }
+    .barto-img {
+      position: absolute;
+      left: 18px;
+      top: 60px;
+      width: 120px;
     }
 
     @keyframes badge-bounce {
@@ -605,6 +612,19 @@
       background: #FED90F;
       padding: 24px 22px;
       text-align: center;
+      position: relative;
+    }
+    .apu-img {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 130px;
+    }
+    .apu-img.right {
+      left: auto;
+      right: 4px;
+      transform: translateY(-50%) scaleX(-1);
     }
     .mp-header {
       display: flex;
@@ -683,6 +703,8 @@
       .price-big { font-size: 2.4em; }
       .countdown-box { min-width: 58px; padding: 8px 10px; }
       .countdown-num { font-size: 1.8em; }
+      .apu-img { width: 70px; top: 14px; transform: translateY(0); }
+      .apu-img.right { transform: translateY(0) scaleX(-1); }
     }
   </style>
 </head>
@@ -841,6 +863,7 @@
 
       <!-- ── Header ── -->
       <div class="header">
+        <img src="elbarto.png" alt="Bart" class="barto-img">
         <div class="donuts-row">
           <img src="dona_rosa.png"    class="donut-img" alt="🍩" style="transform:rotate(-15deg)">
           <img src="dona_celeste.png" class="donut-img" alt="🍩">
@@ -901,12 +924,20 @@
           </div>
         </div>
 
+        <div style="text-align:center;" class="reveal">
+          <img src="novia.png" alt="Novia" style="width:140px;">
+        </div>
+
         <div class="info-row reveal" style="transition-delay:0.12s">
           <span class="info-icon">🕕</span>
           <div>
             <div class="info-label">Horario</div>
             <div class="info-value">18:00 hs</div>
           </div>
+        </div>
+
+        <div style="text-align:center;" class="reveal">
+          <img src="novioscorazon.png" alt="Novios" style="width:140px;">
         </div>
 
         <div class="info-row reveal-right" style="transition-delay:0.19s">
@@ -952,19 +983,16 @@
 
       <!-- ── QR ── -->
       <div class="qr-section reveal">
+        <img src="apu.png" alt="Apu" class="apu-img">
+        <img src="apu.png" alt="Apu" class="apu-img right">
+        <div class="mp-content">
         <div class="mp-header">
           <div class="mp-dot"></div>
           <div class="mp-title">MercadoPago</div>
           <div class="mp-dot"></div>
         </div>
-        <p class="qr-instructions">Podés ingresar el alias manualmente o usar el botón de la cámara para escanear el QR para que se copie:</p>
+        <p class="qr-instructions">Podés transferir al siguiente alias:</p>
 
-        <div class="transferi-wrap reveal">
-          <img src="trasnferi.jpeg" alt="Pantalla Transferir MercadoPago">
-          <div class="camera-circle"></div>
-        </div>
-
-        <div id="qrcode"></div>
         <div class="alias-box">seba.c.93</div>
         <div class="steps">
           <span class="step">Abrí MercadoPago</span>
@@ -976,6 +1004,7 @@
         <p class="qr-note">
           Ingresá el monto que corresponda según tus cuotas. 🍩
         </p>
+        </div><!-- /mp-content -->
       </div>
 
     </div><!-- /card -->
@@ -1066,7 +1095,7 @@
 
     function beginRain() {
     // Spawn burst on load
-    for (var i = 0; i < 28; i++) {
+    for (var i = 0; i < 14; i++) {
       var d = new Donut();
       d.y = -Math.random() * canvas.height * 0.5;
       donuts.push(d);
@@ -1081,7 +1110,7 @@
       // Spawn more while raining
       if (Date.now() < spawnEnd) {
         spawnTimer++;
-        if (spawnTimer % 5 === 0) donuts.push(new Donut());
+        if (spawnTimer % 10 === 0) donuts.push(new Donut());
       }
 
       donuts.forEach(function(d) { d.update(); d.draw(); });
@@ -1155,12 +1184,7 @@
   // ═══════════════════════════════════════
   // 4. QR CODE
   // ═══════════════════════════════════════
-  new QRCode(document.getElementById('qrcode'), {
-    text: 'seba.c.93',
-    width: 200, height: 200,
-    colorDark: '#1a1a1a', colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
+  // QR eliminado
 
   // ═══════════════════════════════════════
   // 5. Donut hover spin (re-trigger)
